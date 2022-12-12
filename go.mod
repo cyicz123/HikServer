@@ -1,4 +1,4 @@
-module hikvision.com/chengyue5/hik-server
+module github.com/cyicz123/HikServer
 
 go 1.19
 
