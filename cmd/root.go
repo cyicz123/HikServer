@@ -23,7 +23,7 @@ package cmd
 
 import (
 	"os"
-
+	"github.com/cyicz123/HikServer/config"
 	"github.com/spf13/cobra"
 )
 
@@ -35,25 +35,28 @@ var (
 		Use:   "hikServer",
 		Short: "测试设备ISAPI、SDK监听功能的工具",
 		Long: `hikServer能够建立一个ISAPI或者SDK监听服务器
-	并且将设备上传的报文和图片放在设备ip同名的文件夹下`,
+并且将设备上传的报文和图片放在设备ip同名的文件夹下`,
 		// Uncomment the following line if your bare application
 		// has an action associated with it:
 		// Run: func(cmd *cobra.Command, args []string) { },
 	}
-
-	Port int16
+	cfg *config.Config
+	cfgErr error
 )
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
+	cfg, cfgErr = config.NewConfig()
+	if cfgErr != cfgErr {
+		println(cfgErr)
+		os.Exit(1)
+	}
+	cfgErr = rootCmd.Execute()
+	if cfgErr != nil {
+		println(cfgErr)
 		os.Exit(1)
 	}
 }
 
-func init() {
-	rootCmd.PersistentFlags().Int16VarP(&Port, "port", "p", 7200, "server port")
-}
 
 

@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 package main
 
-import "hikvision.com/chengyue5/hik-server/cmd"
+import "github.com/cyicz123/HikServer/cmd"
 
 func main() {
 	cmd.Execute()
